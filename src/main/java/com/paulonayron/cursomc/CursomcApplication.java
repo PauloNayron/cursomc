@@ -25,6 +25,8 @@ public class CursomcApplication implements CommandLineRunner {
 	private EnderecoRepository enderecoRepository;
 	@Autowired
 	private ClienteRepository clienteRepository;
+	@Autowired
+	private UsuarioRepository usuarioRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(CursomcApplication.class, args);
@@ -69,6 +71,14 @@ public class CursomcApplication implements CommandLineRunner {
 
 		clienteRepository.saveAll(Arrays.asList(cli1));
 		enderecoRepository.saveAll(Arrays.asList(e1,e2));
+
+		Usuario pauloNayron = new Usuario();
+		pauloNayron.setNome("Paulo Nayron");
+		pauloNayron.setLogin("999999");
+		pauloNayron.setSenha("123");
+		pauloNayron.setStatus(true);
+		pauloNayron.setEmail("paulonayron.s@hotmail.com");
+		usuarioRepository.saveAll(Arrays.asList(pauloNayron));
 
 	}
 

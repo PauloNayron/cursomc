@@ -1,5 +1,7 @@
 package com.paulonayron.cursomc.config;
 
+import com.paulonayron.cursomc.services.seguranca.AuthProviderService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -15,6 +17,9 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 @EnableAuthorizationServer
 public class SegurancaConfig extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    private AuthProviderService authProvider;
+
     @Bean
     @Override
     protected AuthenticationManager authenticationManager() throws Exception {
@@ -23,8 +28,9 @@ public class SegurancaConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("paulo.nayron").password("123").roles("ADMIN");
-        auth.inMemoryAuthentication().withUser("usuario.teste").password("123").roles("ADMIN");
+        // auth.inMemoryAuthentication().withUser("paulo.nayron").password("123").roles("ADMIN");
+        // auth.inMemoryAuthentication().withUser("usuario.teste").password("123").roles("ADMIN");
+        auth.authenticationProvider(authProvider);
     }
 
     @Bean
