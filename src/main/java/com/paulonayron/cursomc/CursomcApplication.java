@@ -75,7 +75,7 @@ public class CursomcApplication implements CommandLineRunner {
 		Usuario pauloNayron = new Usuario();
 		pauloNayron.setNome("Paulo Nayron");
 		pauloNayron.setLogin("999999");
-		pauloNayron.setSenha("123");
+		pauloNayron.setSenha("testedeSenha");
 		pauloNayron.setStatus(true);
 		pauloNayron.setEmail("paulonayron.s@hotmail.com");
 		usuarioRepository.saveAll(Arrays.asList(pauloNayron));

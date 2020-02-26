@@ -1,6 +1,7 @@
 package com.paulonayron.cursomc.services.seguranca;
 
 import com.paulonayron.cursomc.domain.Usuario;
+import org.bouncycastle.openssl.PasswordException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -25,6 +26,9 @@ public class AuthProviderService implements AuthenticationProvider {
         String senha = authentication.getCredentials().toString();
 
         Usuario usuarioBd = usuarioService.getUsuarioByCpf(login);
+        if (!usuarioBd.getSenha().equals(senha)) {
+            throw new IllegalArgumentException("Senha incorreta.");
+        }
 
         if (usuarioBd != null) {
             if (usuarioAtivo(usuarioBd)) {
